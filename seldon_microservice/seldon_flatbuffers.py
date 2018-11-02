@@ -3,20 +3,21 @@ from tornado.iostream import StreamClosedError
 from tornado import gen
 import tornado.ioloop
 
-from fbs.SeldonMessage import *
-from fbs.Data import *
-from fbs.DefaultData import *
-from fbs.Tensor import *
-from fbs.SeldonRPC import *
-from fbs.SeldonPayload import *
-from fbs.Status import *
-from fbs.StatusValue import *
-from fbs.SeldonProtocolVersion import *
-from fbs.SeldonRPC import *
 from flatbuffers.number_types import (UOffsetTFlags, SOffsetTFlags, VOffsetTFlags)
 
 import sys
 import numpy as np
+
+from .fbs.SeldonMessage import *
+from .fbs.Data import *
+from .fbs.DefaultData import *
+from .fbs.Tensor import *
+from .fbs.SeldonRPC import *
+from .fbs.SeldonPayload import *
+from .fbs.Status import *
+from .fbs.StatusValue import *
+from .fbs.SeldonProtocolVersion import *
+from .fbs.SeldonRPC import *
 
 class FlatbuffersInvalidMessage(Exception):
     def __init__(self, msg=None):

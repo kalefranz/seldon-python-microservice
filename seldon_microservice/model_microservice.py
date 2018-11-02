@@ -1,7 +1,3 @@
-from proto import prediction_pb2, prediction_pb2_grpc
-from microservice import extract_message, sanity_check_request, rest_datadef_to_array, \
-    array_to_rest_datadef, grpc_datadef_to_array, array_to_grpc_datadef, \
-    SeldonMicroserviceException
 import grpc
 from concurrent import futures
 
@@ -16,10 +12,16 @@ from tornado.tcpserver import TCPServer
 from tornado.iostream import StreamClosedError
 from tornado import gen
 import tornado.ioloop
-from seldon_flatbuffers import SeldonRPCToNumpyArray,NumpyArrayToSeldonRPC,CreateErrorMsg
 import struct
 import traceback
 import os
+
+from .proto import prediction_pb2, prediction_pb2_grpc
+from .common import extract_message, sanity_check_request, rest_datadef_to_array, \
+    array_to_rest_datadef, grpc_datadef_to_array, array_to_grpc_datadef, \
+    SeldonMicroserviceException
+from .seldon_flatbuffers import SeldonRPCToNumpyArray,NumpyArrayToSeldonRPC,CreateErrorMsg
+
 
 PRED_UNIT_ID = os.environ.get("PREDICTIVE_UNIT_ID")
 
@@ -60,7 +62,7 @@ def get_rest_microservice(user_model,debug=False):
 
     @app.route("/seldon.json",methods=["GET"])
     def openAPI():
-        return send_from_directory('', "seldon.json")
+        return send_from_directory(os.path.dirname(__file__), "seldon.json")
 
     @app.route("/predict",methods=["GET","POST"])
     def Predict():

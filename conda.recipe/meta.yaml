@@ -1,0 +1,54 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: seldon-microservice-python
+  version: {{ data.version }}
+
+source:
+  path: ../
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir"
+  noarch: python
+  entry_points:
+    - seldon-microservice-python = seldon_microservice.microservice:main
+    - seldon-microservice-tester = seldon_microservice.tester:main
+    - seldon-microservice-api-tester = seldon_microservice.api_tester:main
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - grpcio
+    - protobuf
+    - flask
+    - flask-cors
+    - redis-py
+    - tornado
+    - requests
+    - numpy
+    # - python-flatbuffers
+
+
+test:
+  requires:
+    - pytest
+  source_files:
+    - tests/*
+  commands:
+    - seldon-microservice-python --help
+    - seldon-microservice-tester --help
+    - seldon-microservice-api-tester --help
+    - py.test tests
+
+about:
+  home: https://github.com/anaconda-platform/anaconda-platform
+  dev_url: https://github.com/anaconda-platform/anaconda-platform
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Python wrapper for Seldon microservices.

@@ -1,0 +1,5 @@
+[console_scripts]
+seldon-microservice-api-tester = seldon_microservice.api_tester:main
+seldon-microservice-python = seldon_microservice.microservice:main
+seldon-microservice-tester = seldon_microservice.tester:main
+

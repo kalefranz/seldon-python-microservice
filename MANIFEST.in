@@ -1,0 +1,3 @@
+include seldon_microservice/fbs/*.fbs
+include seldon_microservice/proto/*.proto
+include seldon_microservice/seldon.json

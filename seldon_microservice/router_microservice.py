@@ -1,7 +1,3 @@
-from proto import prediction_pb2, prediction_pb2_grpc
-from microservice import extract_message, sanity_check_request, rest_datadef_to_array, \
-    array_to_rest_datadef, grpc_datadef_to_array, array_to_grpc_datadef, \
-    SeldonMicroserviceException
 import grpc
 from concurrent import futures
 
@@ -9,6 +5,11 @@ from flask import jsonify, Flask, send_from_directory
 from flask_cors import CORS
 import numpy as np
 import os
+
+from .proto import prediction_pb2, prediction_pb2_grpc
+from .common import extract_message, sanity_check_request, rest_datadef_to_array, \
+    array_to_rest_datadef, grpc_datadef_to_array, array_to_grpc_datadef, \
+    SeldonMicroserviceException
 
 PRED_UNIT_ID = os.environ.get("PREDICTIVE_UNIT_ID")
 
@@ -39,7 +40,7 @@ def get_rest_microservice(user_router,debug=False):
 
     @app.route("/seldon.json",methods=["GET"])
     def openAPI():
-        return send_from_directory('', "seldon.json")
+        return send_from_directory(os.path.dirname(__file__), "seldon.json")
 
 
     @app.route("/route",methods=["GET","POST"])
