@@ -31,7 +31,7 @@ requirements:
     - tornado
     - requests
     - numpy
-    # - python-flatbuffers
+    - python-flatbuffers
 
 
 test:
