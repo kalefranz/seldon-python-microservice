@@ -9,7 +9,7 @@ source:
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir"
+  script: "{{ PYTHON }} setup.py install"
   noarch: python
   entry_points:
     - seldon-microservice-python = seldon_microservice.microservice:main

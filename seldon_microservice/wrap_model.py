@@ -48,9 +48,9 @@ def wrap_model(
      
     # Make the files executable
     st = os.stat(build_folder+"/build_image.sh")
-    os.chmod(build_folder+"/build_image.sh", st.st_mode | 0111)
+    os.chmod(build_folder+"/build_image.sh", st.st_mode | 0o111)
     st = os.stat(build_folder+"/push_image.sh")
-    os.chmod(build_folder+"/push_image.sh", st.st_mode | 0111)
+    os.chmod(build_folder+"/push_image.sh", st.st_mode | 0o111)
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Utility script to wrap a python model into a docker build. The scipt will generate build folder that contains a Makefile that can be used to build and publish a Docker Image.")
